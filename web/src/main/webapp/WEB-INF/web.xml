@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>KK Web Project</display-name>
+	<!-- 可以用于spring传递webapp.root变量 -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webapp.root</param-value>
+	</context-param>
+
+	<!-- Spring编码filter：fix error encoding in tomcat -->
+	<filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+       <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Support for RESTfull HTTP methods -->
+ 	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Spring security filters -->
+ 	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 设置http-only属性，反XSS -->
+	<session-config>
+		<cookie-config>
+			<http-only>true</http-only>
+		</cookie-config>
+	</session-config>
+
+	<!--  Prevents org.hibernate.LazyInitializationException -->
+<!-- 	<filter>
+		<filter-name>jpaFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+		<init-param>
+	      <param-name>entityManagerFactoryBeanName</param-name>      
+	      <param-value>entityManagerFactory</param-value>       
+   		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>jpaFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+
+	<!-- Main Spring context configuration file -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/app-context.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 激活中间件的defaultServlet来处理静态文件 -->
+	<!-- 
+		Tomcat, Jetty, JBoss, and GlassFish  默认 Servlet的名字 : "default"
+		Google App Engine 默认 Servlet的名字 : "_ah_default"
+		Resin 默认 Servlet的名字 : "resin-file"
+		WebLogic 默认 Servlet的名字 : "FileServlet"
+		WebSphere  默认 Servlet的名字 : "SimpleFileServlet" 
+ 	-->
+ 	<servlet-mapping>   
+    	<servlet-name>default</servlet-name>  
+        <url-pattern>*.jpg</url-pattern>     
+    </servlet-mapping>    
+ 	<servlet-mapping>   
+    	<servlet-name>default</servlet-name>  
+        <url-pattern>*.png</url-pattern>     
+    </servlet-mapping>    
+ 	<servlet-mapping>   
+    	<servlet-name>default</servlet-name>  
+        <url-pattern>*.gif</url-pattern>     
+    </servlet-mapping>    
+    <servlet-mapping>       
+        <servlet-name>default</servlet-name>    
+        <url-pattern>*.js</url-pattern>    
+    </servlet-mapping>    
+    <servlet-mapping>        
+        <servlet-name>default</servlet-name>       
+        <url-pattern>*.css</url-pattern>      
+    </servlet-mapping>  
+    
+    <servlet-mapping>        
+        <servlet-name>default</servlet-name>       
+        <url-pattern>*.html</url-pattern>      
+    </servlet-mapping>  
+    
+    
+    <!-- Processes application requests:配置spring核心servlet --> 
+    <servlet>
+		<servlet-name>app</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- Does not require any additional config, 
+		     because is loading *empty* app-servlet.xml file -->
+		<load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <!-- log4j配置 -->
+    <context-param>
+      <param-name>log4jConfigLocation</param-name>
+      <param-value>/WEB-INF/log4j-web.xml</param-value>
+   </context-param>
+   <context-param>
+   		<!-- 每10秒扫描配置文件变化 -->
+      <param-name>log4jRefreshInterval</param-name>
+      <param-value>10000</param-value>
+   </context-param>  
+    <listener>
+      <listener-class>
+        org.springframework.web.util.Log4jConfigListener
+      </listener-class>
+   </listener> 
+
+    <!-- url配置为/，不带文件后缀，会造成其它静态文件(js，css等)不能访问。
+            如配为*.do，则不影响静态文件的访问 -->
+	<servlet-mapping>
+		<servlet-name>app</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+ 
+	<!-- Handles Http errors -->
+  	<error-page>
+		<error-code>404</error-code>
+		<location>/framework/errors/404</location>
+	</error-page>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/framework/errors/403</location>
+	</error-page> 
+</web-app>

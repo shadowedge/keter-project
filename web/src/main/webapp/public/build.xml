@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+@author:gulx<gulixing@msn.com>
+-->
+<project name="staticCompressor" default="closure-js">
+    <description>uploader Build File</description>
+    <!--当前文件目录路径-->
+    <dirname property="current.dir" file="${basedir}/public"/>
+    <!--配置文件路径-->
+    <property file="build.properties"/>
+     <!--js路径-->
+	<property name="js.dir" location="${current.dir}/javascripts/"/>
+    <!--css路径-->
+    <property name="css.path" location="${uploader.dir}/uploader/css/"/>
+    <!--程序路径-->
+    <property name="closure.path" location="${current.dir}/closure-compiler/compiler.jar"/>
+	
+	<!--备份js，使源文件变成*.source格式-->
+	<target name="jsbackup">
+		<move todir="${js.dir}" includeemptydirs="false">
+			<fileset dir="${js.dir}" includes="**/*.js" excludes="**/*.source"></fileset>
+			<globmapper from="*" to="*.source"/>
+        </move>
+	</target>
+	
+	<!--还原-->
+	<target name="restore" >
+ 		<move todir="${js.dir}" includeemptydirs="false">
+			<fileset dir="${js.dir}" includes="**/*.source"></fileset>
+			<globmapper from="*.source" to="*"/>
+        </move>
+    </target>
+    
+	<target name="cssbackup">
+		<move todir="${batch.dir}" includeemptydirs="false">
+			<fileset dir="${batch.dir}" includes="**/*.css" excludes="**/*.source.js"></fileset>
+			<globmapper from="*" to="*.source.css"/>
+        </move>
+	</target>
+	<!--closure压缩js-->
+	<target name="closure-js" depends="jsbackup"><!-- verbose="true" -->
+        <apply executable="java"  dest="${js.dir}" 
+         failonerror="true" parallel="false">
+			<fileset dir="${js.dir}" includes="**/*.source"/>
+            <arg line="-jar"/>
+            <arg path="${closure.path}"/>
+            <arg line="--charset utf-8"/>
+            <!-- QUIET | DEFAULT | VERBOSE -->
+            <arg line="--warning_level DEFAULT" />
+            <!-- WHITESPACE_ONLY,SIMPLE_OPTIMIZATIONS,ADVANCED_OPTIMIZATIONS -->
+            <arg line="--compilation_level ADVANCED_OPTIMIZATIONS" />
+            <arg value="--js"/>
+            <srcfile/>
+            <arg value="--js_output_file"/>
+            <targetfile/>
+            <mapper type="glob" from="*.source" to="*"/>
+        </apply>
+    </target>
+    
+    <target name="closure" depends="concat,closure-js">	
+    </target>
+    
+    <!--合并js-->
+    <target name="concat">
+        <concat destfile="${uploader.dir}/../uploader.source.js">
+            <path path="${uploader.dir}/base.js"/>
+            <path path="${uploader.dir}/render.js"/>
+            <path path="${uploader.dir}/renderUploader.js"/>
+        </concat>
+    </target>
+</project>
+<!-- 
+　　CC 常用命令选项
+    –charset VAL 对所有文件定义的编码格式
+    –compilationlevel [WHITESPACEONLY | SIMPLEOPTIMIZATIONS | ADVANCEDOPTIMIZATIONS]
+    设定编译级别
+    –debug 开启 debug 选项
+    –define (–D, -D) VAL 设定文件中使用 @define 标注的开关值，即条件编译
+    –externs VAL 编译代码需要调用未编译的代码时，使用它
+    –formatting [PRETTYPRINT | PRINTINPUT_DELIMITER] 格式化输出
+    –js VAL 输入文件，多指定多个，将会被合并
+    –jsoutputfile VAL 输出文件，如果不指定的话，直接输出到 standard output 流
+    –module VAL 定义模块
+    –output_manifest VAL 打印编译文件清单
+    –print_tree 打印语法分析树
+    –warning_level [QUIET | DEFAULT | VERBOSE] 设定报错模式
+ -->

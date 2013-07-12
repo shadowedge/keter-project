@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>web</artifactId>
+  <groupId>keter.project</groupId>
+  <packaging>war</packaging>
+  <version>0.1</version>
+  <name>Keter Original Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+		<!-- moudle 依赖 -->
+		<dependency>
+			<groupId>keter.project</groupId>
+			<artifactId>dao</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		
+       <!-- MySQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.16</version>
+		</dependency>
+		
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<!-- tomcat冲突 -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<!-- tomcat冲突 -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- Validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+
+		<!-- fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+			
+  </dependencies>
+  <build>
+    <finalName>keter-project-web</finalName>
+    <pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<!-- 自动化测试 -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.8.1</version>
+					<configuration>
+						<forkMode>once</forkMode>
+						<argLine>
+							-javaagent:${settings.localRepository}/org/springframework/spring-instrument/${spring.version}/spring-instrument-${spring.version}.jar
+	      				</argLine>
+						<useSystemClassloader>true</useSystemClassloader>
+						<!-- 忽略错误 -->
+					    <testFailureIgnore>false</testFailureIgnore>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+				<!-- 打war包 -->
+				<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<warName>mwp</warName>
+							<!-- 打包时排除日志文件 -->
+							<packagingExcludes>WEB-INF/logs/*.log</packagingExcludes>
+						</configuration>
+				</plugin>
+<!-- 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin> -->
+				
+				<!--
+				This plugin's configuration is used to store Eclipse m2e settings only. 
+				It has no influence on the Maven build itself
+				.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.7,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+			    </plugin>
+			    <!-- ant脚本静态资源压缩 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.7</version>
+					<executions>
+						<execution>
+							<phase>compile</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<tasks>
+									<ant antfile="${basedir}/src/main/webapp/public/build-maven.xml">
+										<target name="closure-js" />
+									</ant>
+								</tasks>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			
+		<!-- 		<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.2.1</version>
+					<executions>
+						<execution>
+							<id>distro-assembly</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+			
+							<configuration>
+								<finalName>MC-Distribution-${project.version}</finalName>
+								<descriptors>
+									<descriptor>src/assemble/src.xml</descriptor>
+								</descriptors>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin> -->
+			
+		<!-- 		<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<tagBase>http://subversion.assembla.com/svn/muaf/tags/releases</tagBase>
+						<branchBase>http://subversion.assembla.com/svn/muaf/branches/releases</branchBase>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+					</configuration>
+				</plugin> -->
+			</plugins>
+		</pluginManagement>
+  </build>
+</project>

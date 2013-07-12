@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<global-method-security pre-post-annotations="enabled" secured-annotations="enabled"><!--  -->
+		<!-- AspectJ pointcut expression that locates our "post" method and applies 
+			security that way <protect-pointcut expression="execution(* bigbank.*Service.post*(..))" 
+			access="ROLE_TELLER"/> -->
+	</global-method-security>
+
+	<!-- 放开首页权限 -->
+	<http pattern="/" security="none"></http>
+	<!-- Permissions configuration -->
+	<http use-expressions="true">
+		<!-- 以/*private*/形式的访问需要登录 -->
+		<intercept-url pattern='/*/private/*' access="hasRole('ADMIN')"/>
+		<remember-me />
+		<form-login login-page="/login"
+			login-processing-url="/authenticate"
+			default-target-url="/" 
+			authentication-failure-url="/login?error=1"
+			always-use-default-target='false' />
+		<logout invalidate-session="true" logout-url="/logout"
+			logout-success-url="/" />
+
+		<!-- Uncomment to limit the number of sessions a user can have -->
+		<session-management invalid-session-url="/login">
+			<!-- <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" 
+				/> -->
+		</session-management>
+	</http>
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="kkUserService" />
+	</authentication-manager>
+</beans:beans>

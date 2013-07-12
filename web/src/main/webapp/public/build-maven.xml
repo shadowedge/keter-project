@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--	
+		通过maven调用时，${basedir}为工程的根目录
+		@author:gulx<gulixing@msn.com>
+-->
+<project name="staticCompressor" default="closure-js">
+    <description>uploader Build File</description>
+    <!--配置文件路径-->
+    <property file="build.properties"/>
+      <!--js路径-->
+	<property name="js.dir" location="${basedir}/src/main/webapp/public/javascripts/"/>
+    <!--css路径-->
+    <property name="css.path" location="${basedir}/src/main/webapp/public/stylesheets/"/>
+    <!--程序路径-->
+    <property name="closure.path" location="${basedir}/src/main/webapp/public/closure-compiler/compiler.jar"/>
+	
+	<!--备份js，使源文件变成*.source格式-->
+	<target name="jsbackup">
+		<move todir="${js.dir}" includeemptydirs="false">
+			<fileset dir="${js.dir}" includes="**/*.js" excludes="**/*.source"></fileset>
+			<globmapper from="*" to="*.source"/>
+        </move>
+	</target>
+	<target name="cssbackup">
+		<move todir="${batch.dir}" includeemptydirs="false">
+			<fileset dir="${batch.dir}" includes="**/*.css" excludes="**/*.source.js"></fileset>
+			<globmapper from="*" to="*.source.css"/>
+        </move>
+	</target>
+	<!--closure压缩js-->
+	<target name="closure-js" depends="jsbackup"><!-- verbose="true" -->
+        <apply executable="java"  dest="${js.dir}" 
+         failonerror="true" parallel="false">
+			<fileset dir="${js.dir}" includes="**/*.source"/>
+            <arg line="-jar"/>
+            <arg path="${closure.path}"/>
+            <arg line="--charset utf-8"/>
+            <!-- QUIET | DEFAULT | VERBOSE -->
+            <arg line="--warning_level DEFAULT" />
+            <!-- WHITESPACE_ONLY,SIMPLE_OPTIMIZATIONS,ADVANCED_OPTIMIZATIONS -->
+            <arg line="--compilation_level ADVANCED_OPTIMIZATIONS" />
+            <arg value="--js"/>
+            <srcfile/>
+            <arg value="--js_output_file"/>
+            <targetfile/>
+            <mapper type="glob" from="*.source" to="*"/>
+        </apply>
+    </target>
+    
+    <target name="closure" depends="concat,closure-js">	
+    </target>
+    
+    <!--合并js-->
+    <target name="concat">
+        <concat destfile="${uploader.dir}/../uploader.source.js">
+            <path path="${uploader.dir}/base.js"/>
+            <path path="${uploader.dir}/render.js"/>
+            <path path="${uploader.dir}/renderUploader.js"/>
+        </concat>
+    </target>
+</project>

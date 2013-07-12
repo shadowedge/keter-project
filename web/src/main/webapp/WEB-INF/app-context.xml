@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <!-- 导入keter配置：由[kk-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
+	<import resource="classpath*:keter-all-config.xml" />
+	<!-- 
+		ignore-unresolvable="true":便于同时引入多个properties文件。
+		缺点：当引用属性文件的key写错时，无法给出准确的错误提示 
+	-->
+	<!-- 导入keter域对象配置 -->
+	<context:property-placeholder location="classpath*:keter-domain.properties" ignore-unresolvable="true"/>
+    <!-- db.properties为xx应用数据库源配置 -->
+	<context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+	
+	<!-- 导入Service配置 -->
+	<import resource="classpath*:service-config.xml" />
+	
+	<!-- Spring security configuration -->
+	<import resource="security-config.xml" />
+	
+	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
+	<context:component-scan base-package="xx*" />
+
+    <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+	
+	<!-- 初始化系统数据 -->
+	<bean name="dbInitializer" class="keter.web.util.DbInit"/>
+	<!-- 全局异常拦截器 -->  
+    <bean id="exceptionResolver" class="keter.web.handler.ExceptionHandler"/>
+      
+	<!-- Map all static files from resources -->
+	<!-- <mvc:resources mapping="/stat/**" location="/static/" /> -->
+
+	<!-- Resolve logical view names to .jsp in the /WEB-INF/views/ directory -->
+	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+		
+	<!-- Annotation validator -->
+	<!-- <bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			Configures Spring MVC DataBinder instances
+			<bean
+				class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+				<property name="validator" ref="validator" />
+			</bean>
+		</property> 
+	</bean>
+ -->
+	<!-- Creates the JSR-303 Validator -->
+	<!-- <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" /> -->	
+</beans>

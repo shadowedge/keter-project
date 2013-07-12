@@ -1,0 +1,28 @@
+<%@ include file="/WEB-INF/views/framework/base/base.jsp" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>登录</title>
+</head>
+<body>
+	用户登录
+	<c:if test="${not empty param.error}">
+		<section id="flash">
+			<p class="error">
+			 Your login attempt was not successful, try
+				again - <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />.
+			</p>
+		</section>
+	</c:if>
+		<form   action="<%=request.getContextPath()%>/authenticate" method="post" >
+			<p style="color: white;">
+				<label for="j_username">用户名</label> <input type="text"
+					name="j_username" id="j_username" />
+			</p>
+			<p style="color: white;">
+				<label for="j_password">密码</label> <input type="password"
+					name="j_password" id="j_password" />
+			</p>
+		</form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿<%@ include file="/WEB-INF/views/framework/base/base.jsp" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>首页</title>
+</head>
+<body>
+	欢迎来到首页!
+	<br> 
+	<a href="<c:url value='/haha'/>">haha</a>
+	<br>
+	<a href="<c:url value='/haha/add'/>">增加haha</a>
+	<br>
+	<a href="<c:url value='/haha/tx'/>">haha 异常和事务回滚</a>
+	<br>
+	<a href="<c:url value='/haha/private/'/>">登录</a>
+</body>
+</html>
