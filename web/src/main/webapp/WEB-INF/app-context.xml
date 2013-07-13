@@ -31,12 +31,7 @@
     <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-	
-	<!-- 初始化系统数据 -->
-	<bean name="dbInitializer" class="keter.web.util.DbInit"/>
-	<!-- 全局异常拦截器 -->  
-    <bean id="exceptionResolver" class="keter.web.handler.ExceptionHandler"/>
-      
+	  
 	<!-- Map all static files from resources -->
 	<!-- <mvc:resources mapping="/stat/**" location="/static/" /> -->
 
