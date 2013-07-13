@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     
-    <!-- 导入keter配置：由[kk-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
+    <!-- 导入keter配置：由[keter-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
 	<import resource="classpath*:keter-all-config.xml" />
 	<!-- 
 		ignore-unresolvable="true":便于同时引入多个properties文件。
