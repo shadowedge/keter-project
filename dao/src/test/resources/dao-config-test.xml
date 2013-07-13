@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <!-- 使用测试环境下的数据源配置 -->  
 	<context:property-placeholder location="db-hsql.properties" ignore-unresolvable="true"/>
-	<!-- 导入keter框架配置：由[kk-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
+	<!-- 导入keter框架配置：由[keter-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
 	<!-- 命令行下运行[mvn test]时不起作用 -->
 	<import resource="classpath*:keter-all-config.xml" />
 	<!-- <context:component-scan base-package="keter*" /> -->
