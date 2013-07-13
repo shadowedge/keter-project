@@ -14,7 +14,7 @@
 	<!-- <context:component-scan base-package="keter*" /> -->
 	<!-- 导入keter框架的域对象配置 -->
 	<context:property-placeholder location="classpath*:keter-domain.properties" ignore-unresolvable="true"/>
-	<context:component-scan base-package="xx*" />
+	<context:component-scan base-package="haha*" />
 	<!-- 使用正式环境下的persitence-config配置 -->
 	<import resource="classpath:dao-config.xml" /> 
 </beans>

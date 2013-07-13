@@ -10,7 +10,7 @@
 	<context:property-placeholder location="test/db-hsql.properties" />
 	
 	<!-- Any configuration of the service Module goes there -->
-    <context:component-scan base-package="xx*" />
+    <context:component-scan base-package="haha*" />
     
 	<!-- 使用正式环境下的services-config配置 -->
 	<import resource="classpath*:service-config.xml" /> 

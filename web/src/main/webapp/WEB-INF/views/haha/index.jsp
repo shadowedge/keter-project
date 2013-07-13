@@ -1,6 +1,6 @@
-﻿<%@ include file="/WEB-INF/views/framework/base/base.jsp" %>
+<%@ include file="/WEB-INF/views/framework/base/base.jsp" %>
 <%@ page language="java" import="java.util.*"%>
-<%@ page import="xx.domain.Haha"%>
+<%@ page import="haha.domain.Haha"%>
 
 <%
 	List list = (List)request.getAttribute("haha");

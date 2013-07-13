@@ -1,4 +1,8 @@
-package xx.web.controller;
+package haha.web.controller;
+
+import haha.dao.HahaDao;
+import haha.domain.Haha;
+import haha.service.HahaService;
 
 import java.util.Date;
 
@@ -17,10 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import xx.dao.HahaDao;
-import xx.domain.Haha;
-import xx.service.HahaService;
 
 @Controller
 @RequestMapping("/haha")

@@ -27,7 +27,7 @@
     	<level value="error" />
     </logger>
     
-    <logger name="xx">
+    <logger name="haha">
         <level value="info" />
     </logger>
 
