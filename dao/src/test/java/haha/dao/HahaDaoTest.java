@@ -1,5 +1,6 @@
-package xx.dao;
+package haha.dao;
 
+import haha.base.AbstractTest;
 import haha.dao.HahaDao;
 import haha.domain.Haha;
 import junit.framework.Assert;
@@ -10,8 +11,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import xx.base.AbstractTest;
 
 public class HahaDaoTest extends AbstractTest {
 	/**
