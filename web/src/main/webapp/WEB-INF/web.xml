@@ -120,8 +120,7 @@
     <servlet>
 		<servlet-name>app</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!-- Does not require any additional config, 
-		     because is loading *empty* app-servlet.xml file -->
+		<!-- Does not require any additional config, because is loading *empty* app-servlet.xml file -->
 		<load-on-startup>1</load-on-startup>
     </servlet>
     
