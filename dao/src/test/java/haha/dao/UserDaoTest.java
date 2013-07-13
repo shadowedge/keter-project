@@ -47,7 +47,8 @@ public class UserDaoTest extends AbstractTest {
 		dao.persist(u1);
 		
 		// 查询：全部
-		Assert.assertEquals(2, dao.findAll().size());
+		//FIXME:因为引入框架config文件，导致dbinit会被执行一次。因此会有两个用户被写入
+		Assert.assertEquals(4, dao.findAll().size());
 		// 查询：特定
 		Assert.assertEquals("顾", dao.findById(u.getId()).getUsername());
 		// 查询：特定
@@ -60,6 +61,6 @@ public class UserDaoTest extends AbstractTest {
 
 		// 删除
 		dao.delete(u.getId(),u1.getId());
-		Assert.assertEquals(0, dao.findAll().size());
+		Assert.assertEquals(2, dao.findAll().size());
 	}
 }
