@@ -16,7 +16,7 @@
 	<title>haha</title>
 </head>
 <body>
-	欢迎你: <%=userName%><br>
+	欢迎你 : <%=userName%><br>
 	haha's name is: <%=haha.getName()%>
 </body>
 </html>
