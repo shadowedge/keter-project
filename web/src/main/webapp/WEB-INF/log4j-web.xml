@@ -23,9 +23,9 @@
 	      </filter>
     </appender>
     
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" >
+    <!-- <logger name="org.hibernate.type.descriptor.sql.BasicBinder" >
     	<level value="error" />
-    </logger>
+    </logger> -->
     
     <logger name="haha">
         <level value="info" />
