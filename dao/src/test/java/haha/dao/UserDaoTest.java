@@ -32,6 +32,7 @@ public class UserDaoTest extends AbstractTest {
 
 	@Test
 	public void test() {
+		logger.info("====开始测试====");
 		User u = new User();
 		u.setAccount("gu");
 		u.setUsername("顾");
