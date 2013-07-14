@@ -11,7 +11,7 @@
     </appender>
     
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" >
-    	<level value="error" />
+    	<level value="trace" />
     </logger>
 
     <logger name="haha">
