@@ -6,7 +6,6 @@ package haha.dao;
 
 import haha.base.AbstractTest;
 import junit.framework.Assert;
-import keter.KeterAbstractServiceTest;
 import keter.domain.User;
 import keter.service.UserService;
 
