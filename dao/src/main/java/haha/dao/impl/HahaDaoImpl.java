@@ -7,7 +7,7 @@ package haha.dao.impl;
 
 import haha.dao.HahaDao;
 import haha.domain.Haha;
-import keter.persistence.base.KeterAbstractDao;
+import keter.dao.base.KeterAbstractDao;
 
 import org.springframework.stereotype.Repository;
 
