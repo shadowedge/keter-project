@@ -9,11 +9,14 @@
     <!-- 使用测试环境下的数据源配置 -->  
 	<context:property-placeholder location="db-hsql.properties" ignore-unresolvable="true"/>
 	<!-- 导入keter框架配置：由[keter-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
-	<!-- 命令行下运行[mvn test]时不起作用 -->
-	<import resource="classpath*:keter-all-config.xml" />
+	
+	<!-- 需要用到keter dao时 -->
+	<context:component-scan base-package="keter*" />
+	<import resource="classpath*:keter-dao-config.xml" />
+	<context:property-placeholder location="classpath*:keter-domain.properties" ignore-unresolvable="true"/>	
+	
 	<!-- <context:component-scan base-package="keter*" /> -->
 	<!-- 导入keter框架的域对象配置 -->
-	<context:property-placeholder location="classpath*:keter-domain.properties" ignore-unresolvable="true"/>
 	<context:component-scan base-package="haha*" />
 	<!-- 使用正式环境下的persitence-config配置 -->
 	<import resource="classpath:dao-config.xml" /> 
