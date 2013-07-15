@@ -9,7 +9,7 @@ import keter.domain.User;
 import org.springframework.stereotype.Repository;
 
 
-@Repository("hahaDao")
+@Repository
 public class HahaDaoImpl extends KeterAbstractDao<Haha>  implements HahaDao {
 	
 	public void ex(){
