@@ -84,7 +84,7 @@ public class HahaConstroller extends BaseController {
 		haha.setName("Don't persist me:Controller!");
 		haha.setPeriodEnd(new Date());
 		try {
-			hahaDao.persist(haha);
+			hahaDao.saveOrUpdate(haha);
 			hahaService.ex();
 		} catch (Exception e) {
 			logger.error(e.getMessage());

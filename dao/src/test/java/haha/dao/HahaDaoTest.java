@@ -42,18 +42,20 @@ public class HahaDaoTest extends AbstractTest {
 		haha2.setUserId(1L);
 
 		//保存
-		dao.persist(haha1);
-		haha2 = dao.persistEntity(haha2);
+		dao.save(haha1);
+		haha2 = dao.saveEntity(haha2);
 		logger.info("find all");
-		//查询：全部
-		Assert.assertEquals(2, dao.findAll().size());
+	
 		
 		//查询：特定
 		Assert.assertEquals(haha2.getId().longValue(), dao.findById(haha2.getId()).getId().longValue());
 		
+		//查询：全部
+		Assert.assertEquals(2, dao.findAll().size());
+				
 		//修改
 		haha2.setName("haha2 updated");
-		dao.merge(haha2);
+		dao.saveOrUpdate(haha2);
 		Assert.assertEquals("haha2 updated", dao.findById(haha2.getId()).getName());
 	}
 }

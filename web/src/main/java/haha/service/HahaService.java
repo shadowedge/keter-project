@@ -37,7 +37,7 @@ public class HahaService {
 	}
 	
 	public Haha add(Haha haha){
-		return hahaDao.persistEntity(haha);
+		return hahaDao.saveEntity(haha);
 	}
 	
 	/**
