@@ -10,14 +10,17 @@
     
     <!-- 导入keter配置：由[keter-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
 	<import resource="classpath*:keter-all-config.xml" />
-	<!-- 
-		ignore-unresolvable="true":便于同时引入多个properties文件。
-		缺点：当引用属性文件的key写错时，无法给出准确的错误提示 
-	-->
-	<!-- 导入keter域对象配置 -->
-	<context:property-placeholder location="classpath*:keter-domain.properties" ignore-unresolvable="true"/>
-    <!-- db.properties为haha应用数据库源配置 -->
-	<context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+
+    <!-- 引入多个配置文件且不会忽略错误 -->	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+                <!-- 导入keter域对象配置 -->
+                <value>classpath:keter-domain.properties</value>
+            </list>
+        </property>
+    </bean>
 	
 	<!-- 导入Service配置 -->
 	<import resource="classpath*:service-config.xml" />
