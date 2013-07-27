@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 1.0.0
  */
 public class UserServiceTest extends AbstractTest {
-
+	
 	@Autowired
 	private UserService service;
 

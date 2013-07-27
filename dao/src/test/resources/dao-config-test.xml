@@ -9,6 +9,10 @@
     <!-- 使用测试环境下的数据源配置 -->  
 	<context:property-placeholder location="db-hsql.properties" ignore-unresolvable="true"/>
 	
+	
+	<context:component-scan base-package="haha.domain" />
+	<context:component-scan base-package="haha.dao" />
+	
 	<!-- [keter service]配置开始：如需用到keter service，须进行如下配置 -->
 	<context:component-scan base-package="keter*" />
 	<import resource="classpath*:keter-service-config.xml" />

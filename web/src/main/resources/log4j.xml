@@ -13,7 +13,11 @@
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" >
     	<level value="error" />
     </logger>
-
+	<!-- 如果想看平台日志，可以添加本段 -->
+    <logger name="keter">
+        <level value="info" />
+    </logger>
+    
      <logger name="haha">
         <level value="info" />
     </logger>

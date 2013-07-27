@@ -9,4 +9,6 @@
     
 	<!-- Import the other classes -->
     <import resource="classpath*:dao-config.xml" />
+    
+    <context:component-scan base-package="haha.service" />
 </beans>
