@@ -10,9 +10,6 @@
     
     <!-- 导入keter配置：由[keter-all-config]统一对外提供框架服务，不建议单独导入其他配置文件 -->
 	<import resource="classpath*:keter-all-config.xml" />
-
-    <!-- 初始化系统数据 -->
-	<bean name="dbInitializer" class="keter.web.util.DbInit"/>
 	
     <!-- 引入多个配置文件且不会忽略错误 -->	
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -32,8 +29,8 @@
 	<import resource="security-config.xml" />
 	
 	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
-	<!-- 直接从容器运行时，不支持通配符！ -->
-	<context:component-scan base-package="haha.web" />
+	<!-- 不写通配符也可以扫描子目录，且在容器中运行正确！ -->
+	<context:component-scan base-package="haha" />
 
     <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
 	<!-- Enables the Spring MVC @Controller programming model -->
