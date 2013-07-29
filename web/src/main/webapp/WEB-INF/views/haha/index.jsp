@@ -18,5 +18,6 @@
 <body>
 	欢迎你 : <%=userName%><br>
 	haha's name is: <%=haha.getName()%>
+	<a href="<c:url value='/logout'/>">注销</a>
 </body>
 </html>

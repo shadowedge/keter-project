@@ -26,5 +26,4 @@
         <level value="error" />
         <appender-ref ref="CONSOLE" />
     </root>
-    
 </log4j:configuration>
