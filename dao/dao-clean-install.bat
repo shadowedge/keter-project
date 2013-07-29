@@ -1,3 +1,3 @@
 echo
-mvn clean install
+mvn clean compile install
 pause
