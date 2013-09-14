@@ -14,7 +14,7 @@
      <context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/haha-context.xml</param-value>
-	</context-param> -->
+	</context-param>
 	<!-- log4j配置 -->
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
@@ -79,7 +79,7 @@
 	<servlet>
 		<servlet-name>haha</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<!-- 避免单独出现haha-servlet.xml-->
+		<!-- 显示提供配置文件位置：避免出现孤立的haha-servlet.xml文件-->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/haha-context.xml</param-value>
@@ -87,42 +87,10 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
-	<!-- ========= servlet-mapping =========== -->
-	<!-- 激活中间件的defaultServlet来处理静态文件 -->
-	<!-- 
-		Tomcat, Jetty, JBoss, and GlassFish  默认 Servlet的名字 : "default"
-		Google App Engine 默认 Servlet的名字 : "_ah_default"
-		Resin 默认 Servlet的名字 : "resin-file"
-		WebLogic 默认 Servlet的名字 : "FileServlet"
-		WebSphere  默认 Servlet的名字 : "SimpleFileServlet" 
- 	-->
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.jpg</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.png</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.gif</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.js</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.css</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
 	<!-- url配置为/，不带文件后缀，会造成其它静态文件(js，css等)不能访问。 如配为*.do，则不影响静态文件的访问 -->
 	<servlet-mapping>
 		<servlet-name>haha</servlet-name>
+		<!-- 不起作用了??? -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
@@ -144,6 +112,4 @@
 		<error-code>403</error-code>
 		<location>/framework/errors/403</location>
 	</error-page>
-
-
 </web-app>
