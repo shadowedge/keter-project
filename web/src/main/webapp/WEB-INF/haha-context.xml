@@ -39,6 +39,18 @@
 	<!-- Map all static files from resources -->
 	<!-- <mvc:resources mapping="/stat/**" location="/static/" /> -->
 
+<!-- 	<decorators defaultdir="/WEB-INF/layouts/">
+		<excludes>
+			<pattern>/static/*</pattern>
+			<pattern>/api/*</pattern>
+		</excludes>
+		
+		<decorator name="default" page="default.jsp">
+			<pattern>/*</pattern>
+		</decorator>
+	</decorators -->
+
+
 	<!-- Resolve logical view names to .jsp in the /WEB-INF/views/ directory -->
 	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
