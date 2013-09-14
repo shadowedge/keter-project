@@ -111,7 +111,7 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<version>2.3</version>
 						<configuration>
-							<warName>mwp</warName>
+							<warName>keter-project</warName>
 							<!-- 打包时排除日志文件 -->
 							<packagingExcludes>WEB-INF/logs/*.log</packagingExcludes>
 						</configuration>
