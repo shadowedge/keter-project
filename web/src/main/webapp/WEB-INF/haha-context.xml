@@ -37,20 +37,12 @@
 	<mvc:annotation-driven />
 	  
 	<!-- Map all static files from resources -->
-	<!-- <mvc:resources mapping="/stat/**" location="/static/" /> -->
-
-<!-- 	<decorators defaultdir="/WEB-INF/layouts/">
-		<excludes>
-			<pattern>/static/*</pattern>
-			<pattern>/api/*</pattern>
-		</excludes>
-		
-		<decorator name="default" page="default.jsp">
-			<pattern>/*</pattern>
-		</decorator>
-	</decorators -->
-
-
+ 	<!-- 方案一：使用默认的Servlet来响应静态文件 -->
+ 	<!-- <mvc:default-servlet-handler/> --> 
+ 	<!-- 方案二：匹配的URL被当做静态资源，由Spring读出到内存中再响应http。 -->
+ 	<mvc:resources mapping="/public/**" location="/public/" />
+ 	<!-- <mvc:default-servlet-handler /> -->  
+ 
 	<!-- Resolve logical view names to .jsp in the /WEB-INF/views/ directory -->
 	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

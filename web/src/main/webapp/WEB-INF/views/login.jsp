@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<link rel="stylesheet" href="${path}/static/stylesheets/default_theme/login.css" type="text/css" />
+	<link rel="stylesheet" href="${path}/public/stylesheets/default_theme/login.css" type="text/css" />
 	<title>XXX平台登录</title>
 </head>
 <body class="bg_body fs">
