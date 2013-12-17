@@ -12,7 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-		<!-- moudle 依赖 -->
+  	    <!-- moudle 依赖 -->
 		<dependency>
 			<groupId>keter.project</groupId>
 			<artifactId>dao</artifactId>

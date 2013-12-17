@@ -45,6 +45,7 @@ public class HahaDaoTest extends AbstractTest {
 		dao.save(haha1);
 		haha2 = dao.saveEntity(haha2);
 		logger.info("find all");
+
 	
 		
 		//查询：特定

@@ -22,7 +22,7 @@ public class Haha{
 	private Date periodEnd;
 	
 	private long userId;//对应userId
-
+	
 	/**
 	 * @return the periodStart
 	 */
