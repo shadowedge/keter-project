@@ -32,7 +32,7 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="keterDataSource" />
 		<!-- WebLogic数据源 -->
-		<!-- <property name="dataSource" ref="wDataSource" /> -->
+		<!-- <property name="dataSource" ref="jndiDataSource" /> -->
 		<property name="packagesToScan">
 			<list>
 				<value>haha.domain*</value>
@@ -58,16 +58,16 @@
 	<tx:annotation-driven transaction-manager="txManager" />
 
 	<!-- weblogic数据源 -->
-	<bean id="wDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>keter-DataSource</value>
+			<value>${jndi.jndiName}</value>
 		</property>
 		<property name="jndiEnvironment">
 			<props>
-				<prop key="java.naming.factory.initial">weblogic.jndi.WLInitialContextFactory</prop>
-				<prop key="java.naming.provider.url">t3://192.168.0.11:7001</prop>
-				<prop key="java.naming.security.principal">weblogic</prop>
-				<prop key="java.naming.security.credentials">weblogic1</prop>
+				<prop key="java.naming.factory.initial">${jndi.initial}</prop>
+				<prop key="java.naming.provider.url">${jndi.url}</prop>
+				<prop key="java.naming.security.principal">${jndi.principal}</prop>
+				<prop key="java.naming.security.credentials">${jndi.credentials}</prop>
 			</props>
 		</property>
 	</bean>
