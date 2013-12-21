@@ -27,5 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="wlthint3client.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
