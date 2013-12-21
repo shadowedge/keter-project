@@ -6,7 +6,7 @@ import keter.web.util.JndiDataSourceValidator;
 
 import org.junit.Test;
 
-public class DataSourceLookUpTest {
+public class JndiDataSourceTest {
 
 	@Test
 	public void test() throws SQLException {
