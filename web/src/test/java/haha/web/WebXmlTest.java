@@ -1,7 +1,7 @@
 package haha.web;
 
 import keter.util.PathUtil;
-import keter.web.util.XMLValidator;
+import keter.web.util.XmlXsdValidator;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -26,6 +26,6 @@ public class WebXmlTest {
 		String webinf = root+"/src/main/webapp/WEB-INF/";
 		String xmlFileName = webinf+"web.xml";
 	    String xsdFileName = webinf+"/xsd/web-app_2_5.xsd";
-	    XMLValidator.validateXMLByXSD(xmlFileName,xsdFileName);
+	    XmlXsdValidator.validateXMLByXSD(xmlFileName,xsdFileName);
 	}
 }
