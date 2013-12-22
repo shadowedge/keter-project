@@ -57,8 +57,9 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="txManager" />
 
-	<!-- weblogic数据源 -->
-	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<!-- jndi weblogic数据源 -->
+	<!-- 资源不存在时将本段注释，否则初始化容器时会尝试连接导致超时 -->
+	<!-- <bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="true">
 		<property name="jndiName">
 			<value>${jndi.jndiName}</value>
 		</property>
@@ -70,5 +71,5 @@
 				<prop key="java.naming.security.credentials">${jndi.credentials}</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 </beans>
